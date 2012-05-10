@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery.js"></script>
+    </head>
+    
+    <body>
+        <h1>Fade in!</h1>
+        <h2>Fade out!</h2>
+        
+        <p>Blue magoo!</p>
+        
+        <button value="triggerFade" onclick="startFade()">Push me!</button>
+        <script type="text/javascript">
+            function startFade(){
+                $('h1').toggle();
+                
+            }
+            $('p').css('color', 'blue');
+        </script>
+    </body>
+</html>
