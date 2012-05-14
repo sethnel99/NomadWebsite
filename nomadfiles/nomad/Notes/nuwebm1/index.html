@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nomad</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles  -->
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <style type="text/css">
+      body {
+	background-image:url('background.jpg');
+	background-size: 100%;
+	padding-top:40px;
+      }
+      div{color:#FFFFF0;}
+      
+      h1 {color:#FFFFF0;
+	padding-top:80px;
+      }
+      h2 {color:#FFFFF0;
+          padding-top:0px;
+      }
+      h3 {color:#FFFFF0;
+          padding-top:10px;
+      }
+      p { padding-top:0px; }
+      
+    </style>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">		
+    	function emailSubmit(){
+				var x=document.forms["emailform"]["email"].value;
+				var atpos=x.indexOf("@");
+				var dotpos=x.lastIndexOf(".");
+				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+				  {
+					document.getElementById('success').innerHTML = "Please enter a valid email address.";
+					document.getElementById('success').style.visibility = 'visible';
+					return false;
+				  }
+		
+		
+				 $.ajax({
+							  type: "POST",
+							  url: "http://174.129.199.73/addemail.php",
+							  data: {
+									email: $("#email").val()
+								},
+							  success: function (data) {
+									$('#success').html(data);
+							  }
+							});  // end Ajax
+							document.getElementById('success').style.visibility = 'visible';	
+							return false;
+			}
+
+
+    </script>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+   <!-- Facebook SDK required for Like button -->
+   <div id="fb-root"></div>
+   <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));</script>
+
+   <!-- <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Nomad</a>
+          <!--<ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          
+          
+        </div>
+      </div>
+    </div>
+  -->
+
+
+    <div class="container">
+        <!-- Main hero unit for a primary marketing message or call to action -->
+        <div>
+	  
+     <!-- Example row of columns -->
+        <div class="row">
+          <div class="span8">
+            <h1>Nomad &mdash; <em>Coming Soon</em></h1>
+            <h2><nobr>Upping the Convenience of Food Trucks</nobr></h2>
+            <h3><nobr>Eat at food trucks?</nobr></h3>
+            <p>Get notified on your phone when your favorite trucks arrive nearby, and accurately track their locations.</p><p><strong>Favorite food sometimes out of stock?</strong> No more: preorder using your credit card, and explore their menus before they arrive.</p>
+            <h3><nobr>Run a food truck?</nobr></h3>
+            <p>Find new customer location hotspots and plan your inventory better.</p><p><strong>Cash only?</strong> Don't turn away another customer, by offering more payment options.</p>
+            <h2>Be the first to learn more:</h2>
+            <form name="emailform" id="emailform" action="" onsubmit="return emailSubmit()" method="post">
+              <div>
+		<input type="text" id="email" name="email" value="Enter your email address">
+		<input class="btn" type=submit value="Submit"></div>
+            </form>
+            <div id="success" style="visibility: hidden">Enter your email address above.</div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://174.129.199.73/" data-text="Can't wait for the Nomad food truck app to arrive!" data-size="large" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="fb-like" data-href="http://174.129.199.73/" data-send="true" data-width="450" data-show-faces="true" data-action="recommend"></div>
+          </div>
+          <div class="span8">
+            <img src="Black_Sprint_Front.png" width="95%"/>
+            </div>
+	</div>
+        
+        <!-- Example row of columns -->
+        
+        
+	
+      </div>
+    </div>
+    
+    <footer>
+      <p>&copy; Nomad 2011</p>
+    </footer>
+
+  </body>
+</html>

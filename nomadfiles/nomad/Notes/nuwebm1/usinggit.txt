@@ -1,0 +1,11 @@
+git pull = git fetch + git merge
+git add moves things from unstaged to staging. requires that you specify which files you're adding.
+git add -u
+
+git push (origin is default for IP) then say master
+
+ex: 	git push origin master
+	git push origin shapes
+
+git checkout <branch name> switches LOCAL branches
+git checkout -b <branch name> will create a new local branch
