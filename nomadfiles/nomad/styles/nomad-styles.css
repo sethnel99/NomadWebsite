@@ -192,3 +192,15 @@ dl {
 	width: 400px;
 	float: left;
 }
+
+.value-prop{
+    width: 44%;
+    margin:10px;
+	float:left;
+}
+
+.value-prop-pic{
+    width: 75%;
+    text-align: center;
+	margin:20px;
+}
