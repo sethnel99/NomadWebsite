@@ -677,7 +677,7 @@ table {
 }
 .table th,
 .table td {
-  padding: 8px;
+  padding: 0px;
   line-height: 18px;
   text-align: left;
   vertical-align: top;
@@ -748,9 +748,8 @@ table {
 .table-striped tbody tr:nth-child(odd) th {
   background-color: #f9f9f9;
 }
-.table tbody tr:hover td,
-.table tbody tr:hover th {
-  background-color: #f5f5f5;
+.table tbody tr:hover .home-nav-item {
+  background-color: rgba(5, 125, 159, .35);
 }
 table .span1 {
   float: none;
@@ -4646,3 +4645,4 @@ a.thumbnail:hover {
     margin-left: 30px;
   }
 }
+

@@ -15,7 +15,7 @@
     
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="styles/nomad-styles.css">
-    
+    <script type="text/javascript" src="javascript/analytics.js"></script> 
   </head>
 
   <body>
@@ -25,20 +25,37 @@
       <div class="container">
 	
 	<ul class="nav" id="twitter-sign-in" style="float:right;">
+    
+   		
 	  <?php
 	    include 'OAuth/EpiCurl.php';
 	    include 'OAuth/EpiOAuth.php';
 	    include 'OAuth/EpiTwitter.php';
 	    include 'OAuth/secret.php';
+		
+		session_start();
+		
+		if(isset($_SESSION['screen_name'])){
+						echo '<li class="active"><a href="home.php">' . $_SESSION['screen_name'] . ' Home <img src="' . $_SESSION['profile_image_url'] . '" width="25px" height="25px"></a></li>';
+						echo '<li class="dropdown"><a href="home.php" class="dropdown-toggle" data-toggle="dropdown">';
+						echo '<img src="images/downarrow.png" width="15px" height="20px">';
+						echo '<b class="dropdown-menu"></b></a><ul class="dropdown-menu"><li><div id="log-out">Log out</div></li></ul>';
+		}
+		
+		else{
 	    $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 	    echo '<li class="active" id="twitter-login"><a href="' . $twitterObj->getAuthorizationUrl() . '"><img src="images/sign-in-with-twitter-d.png"></a></li>';
+		}
 	  ?>
+
+      
+      
 	</ul>
       </div>
     </div>
   </div>
   
-  <div id="logo-div"><a href="index.php"><img id="big-logo" src="images/title_logo.png"/></a></div>
+  <!--<div id="logo-div"><a href="index.php"><img id="big-logo" src="images/title_logo.png"/></a></div>-->
   
   
   <div class="row-fluid" id="main-div">
@@ -48,7 +65,7 @@
      
     <div class="row-fluid">
       <h1 class="headline">Run a mobile business?</h1>
-      <div style="margin-left:750px;"><h4>We can help.</h4></div>
+      <div style="margin-left:850px;"><h4>We can help.</h4></div>
     </div>
     
     <div class="row-fluid info-box box1 color-teal">
@@ -106,7 +123,7 @@
 	  Nomad lets you communicate with your customers, advertise deals, manage logistics, and take payments all in one place.
 	  
 	  <br><br>
-	  <h3>Commuication</h3>
+	  <h3>Communication</h3>
 
 	  <ul style="margin-left: 60px;">
 	    <li>Send tweets, maintain a profile, and update statuses from one platform</li>
@@ -143,6 +160,7 @@
     
     
     <script type="text/javascript" src="javascript/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="javascript/nomad-script.js"></script> 
   </body>
 </html>

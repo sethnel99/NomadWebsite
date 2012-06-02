@@ -32,12 +32,24 @@ class parseRestClient{
 		curl_setopt($c, CURLOPT_TIMEOUT, 5);
 		curl_setopt($c, CURLOPT_USERAGENT, 'parseRestClient/1.0');
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($c, CURLOPT_HTTPHEADER, array(
-			'Content-Type: application/json',
-			'X-Parse-Application-Id: '.$this->appid,
-			'X-Parse-REST-API-Key: '.$this->restkey,
-			'X-Parse-Session-Token: '.$args['parse_session_token']
-		));
+		
+		if(isset($args['contentType'])){
+			curl_setopt($c, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json',
+				'X-Parse-Application-Id: '.$this->appid,
+				'X-Parse-REST-API-Key: '.$this->restkey,
+				'Content-Type: '.$args['contentType'],
+				//'X-Parse-Session-Token: '.$args['parse_session_token']
+			));
+		} else{
+			curl_setopt($c, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json',
+				'X-Parse-Application-Id: '.$this->appid,
+				'X-Parse-REST-API-Key: '.$this->restkey,
+				'X-Parse-Session-Token: '.$args['parse_session_token']
+			));
+		}
+
 			
 		/*if(isset($args['parse_session_token'])){
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
@@ -228,7 +240,8 @@ class parseRestClient{
 		}
 		if($return['code'] != $code){
 			$error = json_decode($return['response']);
-			die('ERROR: response code was '.$return['code'].' with message: '.$error->error);
+			print_r($return);
+			die('ERROR: response code was '.$return['code'].' with message: '.$error['error']);
 		}
 		else{
 			return json_decode($return['response'], true);
@@ -305,28 +318,7 @@ class parseRestClient{
 		//If this is the first time the user has logged in
 		if($return['code'] == '201'){
 			
-			//create a truck object that reflects the user ID
-			$decode_return = json_decode($return['response'], true);
-			
-			$params = array(
-				'className' => 'Trucks',
-				'object' => array(
-					'UserObjectID' => (string)$decode_return['objectId']
-				)
-			);
-			$decode_request = $this->create($params);
-			
-			//update the user object to reflect the ID of the truck
-			$params = array(
-				'parse_session_token' => (string)$decode_return['sessionToken'],
-				'objectId' =>(string)$decode_return['objectId'],
-				'object' => array(
-					'TruckId' => (string)$decode_request['objectId']
-				)
-			);
-							
-			$request = $this->updateUser($params);
-			return $decode_return;
+			return $this->checkResponse($return,'201');
 		}
 		else{					
 			return $this->checkResponse($return,'200');
@@ -358,6 +350,35 @@ class parseRestClient{
 		
 		return $this->checkResponse($return,'200');
 	}
+	
+	
+	
+	public function uploadFile($args){
+		$params = array(
+			'url' => 'files/taiyo.png',
+			'method' => 'POST',
+			'contentType' => $args['contentType']
+			
+		);
+		
+		$return = $this->request($params);
+		
+		return $this->checkResponse($return,'201');
+	}	
+	
+	
+	public function associateFile($args){
+		$params = array(
+			'url' => 'classes/'.$args['className'],
+			'method' => 'POST',
+			'payload' => $args['payload']
+			
+		);
+		
+		$return = $this->request($params);
+		
+		return $this->checkResponse($return,'200');
+	}	
 
 }
 

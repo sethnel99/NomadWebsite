@@ -1,15 +1,23 @@
+
 //
 //Create the NavBar
 //
 
 $('<ul class="nav">\
-  <li class="active"><a href="index.php">Home</a></li>\
-  <li class="active"><a href="about.php">About</a></li>\
+  <li class="active"><a href="index.php">About</a></li>\
+  <li class="active"><a href="team.php">The Team</a></li>\
   <li class="active"><a href="contact.php">Contact</a></li>\
   <li class="active"><a href="truckmap.php">Map</a></li>\
   </ul>').insertAfter('#twitter-sign-in');
 
-
+//
+//Setup icon
+//
+$('head').prepend('\
+		<link rel="shortcut icon" href="images/truck_logo.png" type="image/x-icon" />\
+		<link rel="icon" href="images/truck_logo.png" type="image/x-icon" />');
+		
+		
 //
 //Slide paragraph in and out of info-boxes
 //
@@ -55,11 +63,30 @@ function getQuerystring(key, default_)
 //Insert edit info boxes button
 //
 
-$('<input type="button" value="Edit" class="toggle-edit">').insertBefore('.pic-column').first();
+$('<input type="button" value="Edit" class="toggle-edit btn">').insertBefore('.pic-column').first();
 $('.edit-data').toggle();
 $('.hide-me').toggle();
 
 
+
+$('.delete-item').click(
+	function(){
+		if($(this).val() == 'Delete'){
+			$(this).parent().find('.save-delete').first().val('yes');
+			$(this).parent().parent().find('.toggle-edit').toggle();
+			$(this).parent().find('.submit-menu').first().val('Confirm Delete');
+			$(this).val('Cancel');
+			
+		} else{
+			$(this).parent().find('.save-delete').first().val('no');
+			$(this).parent().parent().find('.toggle-edit').toggle(); 
+			$(this).parent().find('.submit-menu').first().val('Save');
+			$(this).val('Delete');
+			
+		}
+	});
+	
+	
 //
 //Toggle edit mode
 //
@@ -74,4 +101,49 @@ $('.toggle-edit').click(function() {
 		$(this).parent().find('.dl-horizontal dd').css('margin-bottom','0px');
 	}
 	$(this).toggle();
+});
+
+$('#log-out').click(function(){
+	$.post('php/logout.php', 
+	{logout: 'yes'},
+	function(){
+		location = 'index.php';
+	});
+});
+
+//If user owns a business, hide the "Following" information
+$('.home-items').hide();
+if($('.business-exists').length > 0){
+	$('#my-business').show();
+} else {
+	$('#my-following').show();
+	//Have businesses nav button toggle business div
+	$('#make-business').click(function(){
+	
+		$.post('php/createbusiness.php', 
+		{id :'123'},
+		function(){
+			location = 'home.php';
+		});
+	});
+	
+}
+
+
+
+//have nav-buttons do something
+
+$('#nav-business').click(function(){
+	$('.home-items').hide();
+	$('#my-business').show();
+});
+
+$('#nav-following').click(function(){
+	$('.home-items').hide();
+	$('#my-following').show();
+});
+
+$('#nav-analytics').click(function(){
+	$('.home-items').hide();
+	$('#my-analytics').show();
 });
