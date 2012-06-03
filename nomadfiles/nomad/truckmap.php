@@ -12,18 +12,23 @@
     <script type="text/javascript">
 	
       function initialize() {
+			
+			$('#map-canvas').css('height',$(window).height() - 40);
 			var myIcon = new google.maps.MarkerImage('images/truck_marker.png', new google.maps.Size(100,143), new google.maps.Point(0,0), new google.maps.Point(25, 71.5), new google.maps.Size(50,71.5));
-			var greenIcon = new google.maps.MarkerImage('images/truck_marker_green.png', new google.maps.Size(231,329), new google.maps.Point(0,0), new google.maps.Point(25, 71.5), new google.maps.Size(50,71.5));
-			var myCoord;
+			var greenIcon = new google.maps.MarkerImage('images/truck_marker_blue.png', new google.maps.Size(231,329), new google.maps.Point(0,0), new google.maps.Point(25, 71.5), new google.maps.Size(50,71.5));
+			var homeIcon = new google.maps.MarkerImage('images/my_marker.png', new google.maps.Size(230,328), new google.maps.Point(0,0), new google.maps.Point(25, 71.5), new google.maps.Size(50,71.5));
+
+			var truckCoord;
+			var myLocation;
 		
 			//if the query string is set
         	if((getQuerystring('lat') != 0) && (getQuerystring('lng') != 0)){
 				lat = getQuerystring('lat');
 				lng = getQuerystring('lng');
-				myCoord = new google.maps.LatLng(lat,lng);
+				truckCoord = new google.maps.LatLng(lat,lng);
 			 
 			 	var mapOptions = {
-       			center: myCoord,
+       			center: truckCoord,
         		 	zoom: 14,
          		mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
@@ -31,29 +36,47 @@
 				var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
 		
 				new google.maps.Marker({
-					position: myCoord,
+					position: truckCoord,
 					map: map,
 					icon: greenIcon
 				});
 			
 		  //if no query string
         } else {
-				myCoord = new google.maps.LatLng(41.881576,-87.633134);
-			  	var mapOptions = {
-					center: myCoord,
+			  
+			  var mapOptions = {
+					center: new google.maps.LatLng(41.881,-87.633),
 					zoom: 14,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
+			  
+			   var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+				
+			  	navigator.geolocation.getCurrentPosition(function(position) {
+					myLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+					map.setCenter(myLocation);
+
+					new google.maps.Marker({
+					position: myLocation,
+					map: map,
+					icon: homeIcon,
+					title: 'Me!'
+					});	
+				 }, function() {
+					alert("failure");
+				 });
+				
         
-				var map = new google.maps.Map(document.getElementById("map-canvas"),mapOptions);
+				
 		}
+		
 
 		$.getJSON("trucklocations.php", function(data){
 			$.each(data, function(key, val){
-				myCoord = new google.maps.LatLng(parseFloat(val['lat']),parseFloat(val['lng']));
-						
+				truckCoord = new google.maps.LatLng(parseFloat(val['lat']),parseFloat(val['lng']));
+								
 				new google.maps.Marker({
-					position: myCoord,
+					position: truckCoord,
 					map: map,
 					icon: myIcon,
 					title: val['name']
@@ -61,13 +84,14 @@
 			});
 		});
 		
+
       }
 		
     </script>
     <script type="text/javascript" src="javascript/analytics.js"></script>
     </head>
 
-    <body onload="initialize()">
+    <body onload="initialize()" style="padding-top: 0px;">
 <div class="navbar navbar-fixed-top">
        <div class="navbar-inner">
       <div class="container">
@@ -96,10 +120,8 @@
           </div>
    </div>
     </div>
-<div>
-       <h1> </h1>
-    </div>
-<div id="map-canvas"></div>
+<div> </div>
+<div id="map-canvas" style="position: absolute; top: 40px; right: 0;"></div>
 <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script> 
 <script type="text/javascript" src="javascript/nomad-script.js"></script> 
 <script type="text/javascript" src="javascript/about.js"></script>
