@@ -109,7 +109,8 @@
 							'objectId' => $userId,
 							'object' => array(
 								'email' => $_POST['email'],
-								'PhoneNumber' => intval(preg_replace("/[^0-9]/", "", $_POST['phone']))
+								'PhoneNumber' => intval(preg_replace("/[^0-9]/", "", $_POST['phone'])),
+								'twitterhandle' => $_SESSION['screen_name']
 							)
 						);
 						

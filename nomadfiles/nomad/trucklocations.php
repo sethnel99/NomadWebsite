@@ -23,11 +23,22 @@
 	$locationResponse = $parse->query($locationParams);
 	$results = $locationResponse['results'];
 	$arr = array();
+
+
+	
 	foreach($results as $truck){
+		
+		$userResponse = $parse->getUser( array(
+			'objectId' => $truck['UserObjectID']
+		));
+		
+			
 		array_push($arr, array(
 			'name' => $truck['Name'],
 			'lat' => $truck['Location']['latitude'],
-			'lng' => $truck['Location']['longitude']
+			'lng' => $truck['Location']['longitude'],
+			'phone' => $userResponse['PhoneNumber'],
+			'twitter' => $userResponse['twitterhandle']
 			));
 		
 	}

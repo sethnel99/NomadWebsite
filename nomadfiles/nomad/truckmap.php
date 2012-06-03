@@ -20,7 +20,8 @@
 
 			var truckCoord;
 			var myLocation;
-		
+			var contentString;   // holds truck info
+			
 			//if the query string is set
         	if((getQuerystring('lat') != 0) && (getQuerystring('lng') != 0)){
 				lat = getQuerystring('lat');
@@ -46,7 +47,7 @@
 			  
 			  var mapOptions = {
 					center: new google.maps.LatLng(41.881,-87.633),
-					zoom: 14,
+					zoom: 15,
 					mapTypeId: google.maps.MapTypeId.ROADMAP
     			};
 			  
@@ -66,8 +67,6 @@
 					alert("failure");
 				 });
 				
-        
-				
 		}
 		
 
@@ -75,12 +74,25 @@
 			$.each(data, function(key, val){
 				truckCoord = new google.maps.LatLng(parseFloat(val['lat']),parseFloat(val['lng']));
 								
-				new google.maps.Marker({
+				var truckMarker = new google.maps.Marker({
 					position: truckCoord,
 					map: map,
 					icon: myIcon,
 					title: val['name']
 				});
+				
+				contentString = '<div id="mapInfo">' +
+					'<h4>' + val['name'] + '</h4><br>' +
+					'Phone: ' + val['phone'] + '<br>' +
+					'Twitter: ' + val['twitter'] + '<br><br>' +
+					'<a href=nomadinfo.php?nomad=' + val['name'] + '>Menu</a></div>';
+					
+				var truckInfo = new google.maps.InfoWindow({content: contentString});
+				
+				google.maps.event.addListener(truckMarker, 'click', function(){
+					truckInfo.open(map,truckMarker);
+				});
+				
 			});
 		});
 		
