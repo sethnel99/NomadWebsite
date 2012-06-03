@@ -201,6 +201,12 @@ dl {
 	margin-bottom: 0px;
 }
 
+.picture-column{
+	width: 150px;
+	float: left;
+	margin-bottom: 0px;
+}
+
 .info-column{
 	width: 400px;
 	float: left;

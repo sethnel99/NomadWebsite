@@ -240,7 +240,7 @@
          <form action="home.php" method="post">
             <div class="row-fluid info-column">
                <dl class="dl-horizontal">
-                  <dt>Truck Name</dt>
+                  <dt>Nomad</dt>
                   <dd class="fixed-data">';
 				
                      	if(isset($truckResponse['Name'])) echo $truckResponse['Name'] . '</dd>';
@@ -269,7 +269,7 @@
                     
                echo '</dl>
             </div>
-            <input class="edit-data toggle-edit" type="submit" value="Save"/>
+            <input class="edit-data toggle-edit btn btn-primary" type="submit" value="Save"/>
          </form>
       </div>
       <h1 class="section-title">Menu Items</h1>';

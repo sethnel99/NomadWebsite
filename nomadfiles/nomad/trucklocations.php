@@ -37,6 +37,7 @@
 			'name' => $truck['Name'],
 			'lat' => $truck['Location']['latitude'],
 			'lng' => $truck['Location']['longitude'],
+			'tid' => $truck['objectId'],
 			'phone' => $userResponse['PhoneNumber'],
 			'twitter' => $userResponse['twitterhandle']
 			));

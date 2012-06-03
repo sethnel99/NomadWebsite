@@ -85,7 +85,7 @@
 					'<h4>' + val['name'] + '</h4><br>' +
 					'Phone: ' + val['phone'] + '<br>' +
 					'Twitter: ' + val['twitter'] + '<br><br>' +
-					'<a href=nomadinfo.php?nomad=' + val['name'] + '>Menu</a></div>';
+					'<a href=nomadinfo.php?nomad=' + val['tid'] + '>Menu</a></div>';
 					
 				var truckInfo = new google.maps.InfoWindow({content: contentString});
 				
