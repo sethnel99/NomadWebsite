@@ -71,7 +71,7 @@
     <div class="row-fluid info-box box1 color-teal">
       <h1 style="margin-bottom:10px;">Who we are</h1>
       <div class="slide-paragraph">
-	A group of seven dedicated engineers, deep thinkers, and enthusiasts
+	A group of seven engineers, deep thinkers, and enthusiasts
 	dedicated to maximizing the effectiveness with which you run your mobile or small business... Nomad-der what!
 	<br>
 	<img class="stick-person" src="images/person.png"/>
@@ -119,8 +119,18 @@
     <div class="row-fluid info-box box3 color-purple">
       <h1 style="margin-bottom:10px;">How we can help</h1>
       <div class="slide-paragraph">
-	<div class="float-left" style="width: 75%;">
-	  Nomad lets you communicate with your customers, advertise deals, manage logistics, and take payments all in one place.
+	<div class="float-left" style="width: 75%; line-height:11px;">
+   <dl>
+   <dt><h3>Easier Tweeting</h3></dt>
+   <dd>Communicating with customers is important. It's how customers discover and locate mobile entrepreneurs like you. Our app makes communication easier by providing quick pre-formatted, customizable messages and the ability to quickly let customers know that you've arrived or are leaving. No fussing, just quick communication so you can keep your customers in the know.</dd>
+   
+  <br><dt><h3>GPS Location in Each Message</h3></dt>
+  <dd>In an odd location? Trying to figure out how to tell your customers where you are. Don't stress, Nomad automatically embeds a link in each tweet that shows your exact location on a map. No more fumbling to find the nearest interesection or wasting valuable time on elaborate directions.</dd>
+   
+   <br><dt><h3>Inventory Management Made Easy</h3></dt>
+   <dd>Do you know your best locations, your top sellers and what drives your sales? It is hard to keep track of, but inventory management and data are the lifeblood of your business. With Nomad's inventory tool, you can quickly keep track of your sales by location, date and time. Nomad can then use that data to show you how your business is doing with quick reference to revenue, top sellers and more.</dd>
+   </dl>
+	  <!--Nomad lets you communicate with your customers, advertise deals, manage logistics, and take payments all in one place.
 	  
 	  <br><br>
 	  <h3>Communication</h3>
@@ -146,7 +156,7 @@
 	  <ul style="margin-left: 60px;">
 	    <li>Bring in more customers by offering fast and easy credit card payments</li>
 	    <li>Eliminate the hassle of clunky, old cash registers!</li>
-	  </ul>
+	  </ul>-->
 	</div>
 	
 	<div class="pull-right">
